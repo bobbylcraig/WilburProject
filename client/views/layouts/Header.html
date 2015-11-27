@@ -1,0 +1,12 @@
+<template name="Header">	
+	<div class="ui large menu">
+		<a id="brand" href="/" class="item">buDUget</a>
+		<div class="right menu">
+			{{#if currentUser}}
+			<a href="/" class="item"><i class="icon bar chart"></i></a>
+			<div class="item"><i class="icon user"></i><span id="username-show">{{currentUser.username}}</span></div>
+			{{/if}}
+			{{> atNavButton}}
+		</div>
+	</div>
+</template>
