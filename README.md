@@ -1,5 +1,5 @@
 #Wilbur Project
-A budget tracking web application for Denison University. Have quite a bit to do before deployment.
+A budget tracking web application for Denison University. Have quite a bit to do before deployment. Forked originally from Meteor-Budget project on Github.
 
 To Do:
 - [x] Layout Basic Structure of Site
