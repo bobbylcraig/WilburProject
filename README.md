@@ -1,4 +1,9 @@
-# meteor-budget
-A simple app for managing your finances, built on [Meteor](http://meteor.com).
+#Wilbur Project
+A budget tracking web application for Denison University. Have quite a bit to do before deployment.
 
-Available for free at [budget.meteor.com](http://budget.meteor.com).
+To Do:
+- [x] Layout Basic Structure of Site
+- [ ] ~Flesh out the UI~ Perfect the UI
+- [ ] Personalize UI and underlying structure for login despite using useraccounts:core
+- [ ] Separate sections for student vs admin (controller and finance committee)
+- [ ] Ensure item and transaction sections include everything needed
