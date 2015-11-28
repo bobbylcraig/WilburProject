@@ -23,7 +23,7 @@ AccountsTemplates.configure({
     confirmPassword: true,                                       
     defaultState: "signIn",                                                       
     enablePasswordChange: true,                                                                  
-    forbidClientAccountCreation: true,                                                             
+    forbidClientAccountCreation: false,                                                             
     overrideLoginErrors: true,                                                                    
     sendVerificationEmail: true,                                                  
 });

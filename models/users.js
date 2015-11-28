@@ -26,8 +26,8 @@ Schema.User = new SimpleSchema({
         type: Boolean
     },
     admin : {
-        type: Boolean,
-        defaultValue: false
+        type: Number,
+        defaultValue: 0
     },
     createdAt: {
         type: Date

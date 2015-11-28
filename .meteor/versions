@@ -58,6 +58,7 @@ minimongo@1.0.6
 mobile-status-bar@1.0.2
 momentjs:moment@2.9.0
 mongo@1.0.11
+mrt:jquery-ui@1.9.2
 natestrauser:animate-css@3.1.2
 nooitaf:semantic-ui@1.10.4
 npm-bcrypt@0.7.7
