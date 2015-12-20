@@ -8,3 +8,5 @@ To Do:
 - [ ] Separate sections for student vs admin (controller and finance committee)
 - [ ] Ensure item and transaction sections include everything needed
 - [ ] Figure out the darn footer issue when working with JavaScript
+
+Anticipated Completion: Spring 2016
