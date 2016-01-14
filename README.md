@@ -5,7 +5,7 @@ To Do:
 - [x] Layout Basic Structure of Site
 - [ ] ~~Flesh out the UI~~ Perfect the UI
 - [ ] Personalize UI and underlying structure for login despite using useraccounts:core
-- [ ] Separate sections for student vs admin (controller and finance committee)
+- [ ] Separate sections for student vs admin vs controller (to adjust the remaining balance...or something like that)
 - [ ] Ensure item and transaction sections include everything needed
 - [ ] Figure out the darn footer issue when working with JavaScript
 
