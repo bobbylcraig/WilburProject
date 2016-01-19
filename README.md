@@ -8,5 +8,6 @@ To Do:
 - [ ] Separate sections for student vs admin vs controller (to adjust the remaining balance...or something like that)
 - [ ] Ensure item and transaction sections include everything needed
 - [ ] Figure out the darn footer issue when working with JavaScript
+- [ ] Rebuild the login interface and user system
 
 Anticipated Completion: Spring 2016
