@@ -10,4 +10,5 @@ To Do:
 - [ ] Figure out the darn footer issue when working with JavaScript
 - [ ] Rebuild the login interface and user system
 
-Anticipated Completion: Spring 2016
+Anticipated Release: Summer 2016
+Bug Fixes to first budgeting season: Spring 2017
