@@ -11,7 +11,9 @@ To Do:
 - [ ] Rebuild the login interface and user system
 
 Anticipated Completion: Fall 2016
+
 Anticipated Deployment: Spring 2016
 
 Anticipated Release: Summer 2016
+
 Bug Fixes to first budgeting season: Spring 2017
