@@ -10,6 +10,8 @@ To Do:
 - [ ] Figure out the darn footer issue when working with JavaScript
 - [ ] Rebuild the login interface and user system
 
+HAVE MOVED CONSTRUCTION TO A LAMP STACK!
+
 Anticipated Completion: Fall 2016
 
 Anticipated Deployment: Spring 2016
