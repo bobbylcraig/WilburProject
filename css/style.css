@@ -1,0 +1,269 @@
+body {
+	background: #FFF;
+	font-family: 'Open Sans', sans-serif;	
+	overflow-y: scroll;
+}
+
+a {
+	color: #01579B;
+}
+
+.post_title {
+	margin-top: 0;
+}
+
+.post_title a:visited, a:hover {
+	color: #004D40;
+}
+
+.container-fluid {
+	padding: 0;
+}
+
+#headerNav {
+	margin-top: 30px;
+}
+
+#headerNav a {
+	padding: 10px;
+	background: #FFF;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+}
+
+#yourProfile {
+	background: #D1C4E9 !important;
+}
+
+nav ul.pagination li {
+	text-align: center;
+}
+
+.row {
+	margin: 0;
+}
+
+#hWrapper {
+	background: #7CB342;
+	position: fixed;
+	top: 0;
+	z-index: 20;
+	width: 100%;
+}
+
+#wrapper {
+	margin-top: 105px;
+}
+
+.nsfw {
+	background: #E64A19;
+	color: white;
+}
+
+div.nsfw {
+	width: 100%;
+	height: 25px;
+	text-align: center;
+	font-size: 1.3em;
+	margin-bottom: 15px;
+}
+
+span.nsfw {
+	padding: 0 5px;
+}
+
+.single-post.content {
+	margin: 25px 0;
+}
+
+.comment {
+	width: 100%;
+}
+
+.comment-top {
+	width: 100%;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #BDBDBD;
+}
+
+.right {
+	float: right;
+}
+
+/* Posts menu */
+
+#postsMenu ul {
+	list-style: none;
+}
+
+#catNav {
+	padding: 0;
+}
+
+#catNav li {
+	display: block;
+	float: left;
+	width: 100%;
+}
+
+#catNav a {
+	float: left;
+	width: 100%;
+	padding: 8px 13px;
+	color: white;
+	background: #7CB342;
+
+}
+
+#catNav a.active {
+	font-weight: bold;
+}
+
+#catNav>li>a.active, #catNav a:hover {
+	background:#689F38;
+}
+
+#ordernav {
+	padding: 0;
+}
+
+#orderNav a {
+	padding-left: 15%;
+
+	background:#689F38;
+
+}
+
+/* Voting */
+div.score {
+	margin-left: 10px;
+	margin-top: 5px;
+	font-weight: bold;
+}
+
+.up.arrow, .down.arrow {
+	width: 31px;
+	height: 27px;
+	overflow: hidden;
+	position: relative;
+}
+
+.up.arrow {
+	background: url("../img/uparrow.png") 0 0;
+}
+
+.up.arrow:hover {
+	background: url("../img/uparrow.png") 0 -27px;
+	cursor: pointer;
+}
+
+.down.arrow {
+	margin-top: 10px;
+	background: url("../img/downarrow.png") 0 0;
+}
+
+.down.arrow:hover {
+	background: url("../img/downarrow.png") 0 -27px;
+	cursor: pointer;
+}
+
+.arrow.up.hasVoted_1, .arrow.up.hasVoted_1:hover {
+	background: url("../img/greyarrow.png") 0 -27px;
+}
+
+.arrow.up.hasVoted_-1, .arrow.up.hasVoted_-1:hover {
+	background: url("../img/greyarrow.png") 0 0px;
+}
+
+.arrow.down.hasVoted_-1, .arrow.down.hasVoted_-1:hover {
+	background: url("../img/greyarrow.png") 0 -27px;
+	-moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
+
+.arrow.down.hasVoted_1, .arrow.down.hasVoted_1:hover {
+	background: url("../img/greyarrow.png") 0 0px;
+	-moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+}
+
+/* PROFILE */
+.profilePicture {
+	max-width: 100%;
+}
+
+#profile {
+	margin-bottom: 25px;
+}
+
+#latestPosts {
+	margin-bottom: 25px;
+}
+
+#latestPosts h4 {
+	background: #7CB342;
+	color: white;
+	padding: 10px;
+	margin: 0;
+}
+
+#login-dp{
+min-width: 250px;
+padding: 14px 14px 0;
+overflow:hidden;
+background-color:rgba(255,255,255,.8);
+}
+#login-dp .help-block{
+    font-size:12px    
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0    
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc 
+}
+.btn-tw{
+    color: #fff;
+    background-color:#55acee;
+}
+.btn-tw:hover{
+    color: #fff;
+    background-color:#59b5fa;
+}
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
+}
