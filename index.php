@@ -1,7 +1,8 @@
+<div class="check-if-not-mobile">
+
 <?php
 
 session_start();
-
 require_once "config.php";
 require_once "functions/functions.php";
 
@@ -22,24 +23,20 @@ if (isset($_GET['p'])) {
 		case 'profile':
 			require "profile.php";
 			break;
-		case 'dashboard':
-			require "dashboard.php";
-			break;
 		case 'analytics':
 			require "analytics.php";
 			break;
-		case 'indexer':
+		case 'admin_controls':
+			require "admin_controls.php";
+			break;
+		case 'dashboard':
 		default:
-			require "indexer.php";
+			require "dashboard.php";
 			break;
 	}
 } else {
-	require "indexer.php";
+	require "dashboard.php";
 }
 ?>
 
-		</div> <!-- col-xs-12 -->
-	</div> <!-- wrapper -->
-</div> <!-- container -->
-</body>
-</html>
+</div>

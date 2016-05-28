@@ -7,7 +7,7 @@ function dbQuery($query) {
 	$db = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DATABASE);
 
 	if (mysqli_connect_errno($db)) {
-		$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Det gick inte att ansluta till databasen'];
+		$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Problem with database connection.'];
 		header('Location: ../index.php');
 		die;
 	}
@@ -15,11 +15,11 @@ function dbQuery($query) {
 	$result = mysqli_query($db, $query);
 
 	if (mysqli_errno($db)) {
-		$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Något gick fel'];
+		$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Problem with query.'];
 		header('Location: ../index.php');
 		die;
 	}
-
+	
 	if (mysqli_num_rows($result)>0) {
 		while ($row = mysqli_fetch_assoc($result)) {
 			$data[] = $row;
@@ -28,7 +28,12 @@ function dbQuery($query) {
 	mysqli_free_result($result);
 	mysqli_close($db);
 
-	return $data;
+	if ( !empty($data) ) {
+		return $data;
+	}
+	else {
+		return NULL;
+	}
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -74,15 +79,4 @@ function randomString($length = 10) {
 		$string .= $letters[$letter];
 	}
 	return $string;
-}
-
-/////////////////////////////////////////////////////////////////
-/// randomizes new name for file, checks if exists. Recursive. 
-function newNameForProfilePicture($imageFileType) {
-	$newName = randomString() . "." . $imageFileType;
-
-	if (file_exists($newName . "." . $imageFileType)) {
-		newNameForProfilePicture($imageFileType);
-	}
-	return $newName;
 }

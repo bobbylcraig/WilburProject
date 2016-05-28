@@ -12,7 +12,16 @@ $query = "SELECT * FROM users WHERE username = '$username'";
 $user = dbQuery($query);
 
 if (password_verify($password, $user[0]['password'])) {
-	$_SESSION['user'] = $user[0];
+	if ( $user[0]['isActive'] ) {
+		$_SESSION['user'] = $user[0];
+		header('Location: ../index.php');
+		die;
+	}
+	$_SESSION['feedback'] = [
+		'color' => 'red', 
+		'message' =>'It seems that organization is no longer active. Contact the finance chair to update this.'
+	];
+	$_SESSION['feedback']['username'] = $username; 
 	header('Location: ../index.php');
 	die;
 } else {

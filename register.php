@@ -1,3 +1,5 @@
+<script src="scripts/dashboard.js"></script>
+
 <?php if (isLoggedIn() and $_SESSION['user']['role'] == 'admin'):
 
 $username = "";
@@ -19,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$password 	= mysqli_real_escape_string($db, $_POST['password']);
 	$password2 	= mysqli_real_escape_string($db, $_POST['password2']);
 	$role 		= mysqli_real_escape_string($db, $_POST['role']);
+	$category	= mysqli_real_escape_string($db, $_POST['category']);
 	
 	if (strlen($username) < 3) {
 		$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Username must be at least 3 characters.'];
@@ -26,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		die;
 	}
 	
-	if (strlen($screenname) < 5) {
-		$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Screenname must be at least 5 characters.'];
+	if (strlen($screenname) < 2) {
+		$_SESSION['feedback'] = ['color'=>'red', 'message'=>'Screenname must be at least 2 characters.'];
 		header($location);
 		die;
 	}
@@ -64,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 	$password = password_hash($password, PASSWORD_DEFAULT);
 
 	// then insert
-	$query = sprintf("INSERT INTO users (username, password, screenname, role) VALUES ('%s', '%s', '%s', '%s')", $username, $password, $screenname, $role);
+	$query = sprintf("INSERT INTO users (username, password, screenname, role, category) VALUES ('%s', '%s', '%s', '%s', '%s')", $username, $password, $screenname, $role, $category);
 	$result = mysqli_query($db, $query);
 
 	if (mysqli_errno($db)) {
@@ -81,15 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <?php require "incl/header.php"; ?>
 
-<?php if (isset($_SESSION['feedback'])) {
-	echo '<div class="alert alert-danger">' . $_SESSION['feedback']['message'] . '</div>';
-	unset($_SESSION['feedback']);
-}
-?>
-
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-
+		<?php if (isset($_SESSION['feedback'])) {
+			echo '<div class="alert alert-danger text-center">' . $_SESSION['feedback']['message'] . '</div>';
+			unset($_SESSION['feedback']);
+		}
+		?>
 		<form id="registerform" action="index.php?p=register" method="POST">
 			<div class="form-group">
 				<label for="username">Username:</label>
@@ -103,9 +104,26 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 				<label for="password">Password:</label> 
 				<input type="password" name="password" class="form-control">
 			</div>
+			<span id="pwfeedback"></span>
 			<div class="form-group">
 				<label for="password2">Repeat Password:</label> 
 				<input type="password" name="password2" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="category">Organization Role (None if not org):</label>
+				<select class="form-control" name="category" type="text">
+					<option value="None">None (not an org)</option>
+					<option value="C3">C3</option>
+					<option value="DCA">DCA</option>
+					<option value="Events & Traditions">Events & Traditions</option>
+					<option value="Fraternity & Sorority">Fraternity & Sorority Life</option>
+					<option value="Honoraria & Academic Interests">Honoraria & Academic Interests</option>
+					<option value="Media">Media</option>
+					<option value="Performing Arts">Performing Arts</option>
+					<option value="Social Justice & Advocacy">Social Justice & Advocacy</option>
+					<option value="Special Interest">Special Interest</option>
+					<option value="Spirit & Club Sports">Spirit & Club Sports</option>
+				</select>
 			</div>
 			<div class="form-group">
 				<label for="role">New User Role:</label>
@@ -123,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </div>
 
 <?php elseif(isLoggedIn()):
-	header('Location: indexer.php');
+	header('Location: dashboard.php');
 	
 	else:
 	header('Location: index.php');
