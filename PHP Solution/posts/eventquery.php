@@ -51,7 +51,7 @@
     $show_to_org = sqlQuery("SELECT done_allocating FROM (SELECT org_year.year_id FROM event JOIN org_year ON event.org_year_id = org_year.org_year_id WHERE event.event_id = " . $_SESSION['event_id'] . ") AS dad JOIN year ON year.year_id = dad.year_id ORDER BY done_allocating DESC;")[0]['done_allocating'];
 ?>
 <div class="row">
-<div class="col-md-9">
+<div class="col-md-9 col-md-push-9">
     <div class="bs-callout bs-callout-parent">
         <figure class="highlight">
             <!-- FOR ADMIN SHOW SWITCH SLIDER TO CHECK IF VIEWED OR NOT -->
@@ -137,10 +137,10 @@
     </div>
     <div class="aboutExpenditure"></div>
 </div>
-<div class="col-md-3">
+<div class="col-md-3 col-md-pull-3">
     <ul id="expenditure-sidebar" style="width: 90%;" class="sidebar-nav expenditure-sort sortable list">
         <?php if ( !($_SESSION['user']['role'] == "observe") ) {
-            echo '<li class="sidebar-brand add-line-item" id="disabled"><a>Add Line Item To Event</a></li>';
+            echo '<li class="sidebar-brand add-line-item" style="cursor:pointer;" id="disabled"><a>Add Line Item To Event</a></li>';
         }
         ?>
         <?php

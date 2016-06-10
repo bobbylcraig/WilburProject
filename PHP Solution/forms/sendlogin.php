@@ -11,6 +11,7 @@ $user = sqlQuery("SELECT * FROM users WHERE username = '$username'");
 
 if (password_verify($password, $user[0]['password'])) {
 	if ( $user[0]['isActive'] ) {
+		sqlQuery("UPDATE users SET last_login = now() WHERE username = '$username';", "UPDATE");
 		$_SESSION['user'] = $user[0];
 		header('Location: ../index.php');
 		die;

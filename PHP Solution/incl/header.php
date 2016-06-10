@@ -13,7 +13,7 @@
 
 	<link rel="shortcut icon" href="favicon.png">
 	
-	<title>buDUget<?php if (isset($_SESSION['page_name'])) echo ' ' . $_SESSION['page_name'];?></title>
+	<title>buDUget</title>
 
 	<script src="js/jquery-2-2-3.js"></script>
 	<script src="js/jquery-1-11-4.js"></script>
