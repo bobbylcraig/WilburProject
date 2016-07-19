@@ -14,8 +14,8 @@ HAVE MOVED CONSTRUCTION TO A LAMP STACK!
 
 Anticipated Completion: Fall 2016
 
-Anticipated Deployment: Spring 2016
+Anticipated Deployment: Spring 2017
 
-Anticipated Release: Summer 2016
+Anticipated Release: Spring 2017
 
 Bug Fixes to first budgeting season: Spring 2017
