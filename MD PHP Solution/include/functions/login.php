@@ -1,6 +1,6 @@
 <?php
-  require_once("functions.php");
   require_once("config.php");
+  require_once("functions.php");
 
   session_start();
 
@@ -48,6 +48,7 @@
       $mysqli->close();
       unset($array['password'], $array['last_login'], $array['isActive'], $array['account_date']);
   		$_SESSION['user'] = $array;
+      $_SESSION['viewing_user_id'] = $_SESSION['user']['id'];
   		header('Location: ../../budget.php');
   		die;
   	}

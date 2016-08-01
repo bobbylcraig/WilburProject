@@ -6,10 +6,11 @@
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
-      margin: 0;
+      margin: 1em;
       color: white;
       font-size: .9em;
       line-height: 1.4;
+      border-radius: 5px;
       <?php
       switch ($_SESSION['feedback']['color']) {
         case 'red':
