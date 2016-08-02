@@ -195,8 +195,30 @@ $(function() {
 			    },
 			  });
 				$("#add-expenditure-button").on('click', function() {
-					alert("Hello");
-				});
+					var event_id = $('#event_name').attr('number');
+					$.ajax({
+							data: {'event_id': event_id},
+							type: 'POST',
+							url: '/include/budget/expenditureQueries/addExpenditure.php',
+							success: function(data) {
+								$('.event-area li#event_' + event_id).click();
+							},
+					});
+				}); // ADD EXPENDITURE BUTTON
+				$("#delete-expenditure-button").on('click', function() {
+					var event_name = $('.event-card .card-title').text().trim();
+					var event_id = $('#event_name').attr('number');
+					if (confirm("Are you sure you want to delete " + event_name + "?")) {
+						$.ajax({
+							data: {'event_id': event_id},
+							type: 'POST',
+							url: '/include/budget/eventQueries/deleteEvent.php',
+							success: function(data) {
+								location.reload();
+							},
+						});
+					}
+				}); // DELETE EXPENDITURE BUTTON
       } // END SUCCESS
     }); // END AJAX
   }); // END .peak-card

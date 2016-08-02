@@ -67,7 +67,7 @@
     <?php if ( canEdit() ) { ?>
       <nav class="container">
         <?php if ( isset($_POST['viewing_event']) ) { ?>
-          <a href="#" tooltip="Delete Event" class="buttons"><i class="material-icons">delete</i></a>
+          <a id="delete-expenditure-button" tooltip="Delete Event" class="buttons"><i class="material-icons">delete</i></a>
           <a id="add-expenditure-button" tooltip="Add Expenditure" class="buttons"><i class="material-icons">add_circle_outline</i></a>
           <?php if ( ($_SESSION['user']['role'] == 'org') || (( $_SESSION['viewing_user_id'] != $_SESSION['user']['id'] ) && canEdit()) ) { ?>
             <a href="/include/budget/eventQueries/addEvent.php?adding_user_id=<?php echo $_SESSION['viewing_user_id']; ?>" tooltip="Add Event" class="buttons"><i class="material-icons">add</i></a>
@@ -76,7 +76,7 @@
             <a href="#" tooltip="Visited Event" class="buttons"><i class="material-icons">visibility_off</i></a>
           <?php } ?>
         <?php } else { ?>
-            <a href="#" tooltip="Add Event" class="buttons"><i class="material-icons">add</i></a>
+            <a href="/include/budget/eventQueries/addEvent.php?adding_user_id=<?php echo $_SESSION['viewing_user_id']; ?>" tooltip="Add Event" class="buttons"><i class="material-icons">add</i></a>
         <?php } ?>
         <a style="cursor: default;" tooltip="Options" class="buttons main-button"><i class="rotate material-icons">settings</i></a>
       </nav>

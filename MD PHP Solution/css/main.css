@@ -388,7 +388,7 @@ hr {
   color: #f33535;
 }
 
-#add-expenditure-button {
+#add-expenditure-button, #delete-expenditure-button {
   cursor: pointer;
 }
 
@@ -941,12 +941,6 @@ nav.container :only-child:not(.material-icons) {
   .collapse-card .top .card-top-column.turn-title {
     display: block;
   }
-}
-
-.editable-input::before, .editable-select::before, .editable-masked::before, .editable-textarea::before {
-  font-family: "Material Icons";
-  content: "\E254";
-  margin-right: 0.5em;
 }
 
 /* Responsive */
