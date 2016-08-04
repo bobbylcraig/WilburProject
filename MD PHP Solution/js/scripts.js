@@ -34,6 +34,31 @@ $(function() {
           axis: 'y',
           handle: '.top'
         }); // END .sortable-expend
+				$('.event-visibility').on('click', function() {
+					var event_id = $('#event_name').attr('number');
+					if ( $(this).is('#viewed-event') ) {
+						$(this).attr('id','unviewed-event');
+						$(this).attr('tooltip','Unvisited Event');
+						$(this).html('<i class="material-icons">visibility_off</i>');
+						$('.event-area #event_' + event_id).removeClass('red');
+						$.ajax({
+							data: {'event_id': event_id, 'new_viewed': 0},
+							type: 'POST',
+							url: '/include/budget/eventQueries/viewedEvent.php',
+						});
+					}
+					else {
+						$(this).attr('id','viewed-event');
+						$(this).attr('tooltip','Visited Event');
+						$(this).html('<i class="material-icons">visibility</i>');
+						$('.event-area #event_' + event_id).addClass('red');
+						$.ajax({
+							data: {'event_id': event_id, 'new_viewed': 1},
+							type: 'POST',
+							url: '/include/budget/eventQueries/viewedEvent.php',
+						});
+					}
+				}); // EVENT VISIBILITY
         (function() {
             ! function(n) {
                 "use strict";
@@ -64,6 +89,7 @@ $(function() {
         }).call(this);
 				$('.editable-input').editable(function(value, settings) {
 					value = escapeHtml(value);
+					var grab = $(this);
 					var field = $(this).attr("id");
 					var number = $(this).attr("number");
 					$.ajax({
@@ -84,7 +110,7 @@ $(function() {
 					return value;
 				}, {
 					cssclass : 'editable',
-					onblur : "submit"
+					onblur : "submit",
 				}); // editable input
 				$('.editable-textarea').editable(function(value, settings) {
 					value = escapeHtml(value);
@@ -161,7 +187,7 @@ $(function() {
 							      case 'Food':
 							          icon_name = "kitchen";
 							          break;
-							      case 'Office Supplies/Printing/Ads':
+							      case 'Office Supplies&#x2F;Printing&#x2F;Ads':
 							          icon_name = "print";
 							          break;
 							      case 'Capital Purchase':
@@ -196,16 +222,31 @@ $(function() {
 			  });
 				$("#add-expenditure-button").on('click', function() {
 					var event_id = $('#event_name').attr('number');
-					$.ajax({
-							data: {'event_id': event_id},
-							type: 'POST',
-							url: '/include/budget/expenditureQueries/addExpenditure.php',
-							success: function(data) {
-								$('.event-area li#event_' + event_id).click();
-							},
+					var validate = true;
+					$('.card-content .detail').each(function(index, value){
+				    if( value.innerText == 'Click to edit...') {
+			        validate = false;
+							value.style.color = "red";
+						}
+						else {
+							value.style.color = "inherit";
+						}
 					});
-				}); // ADD EXPENDITURE BUTTON
-				$("#delete-expenditure-button").on('click', function() {
+					if ( validate ) {
+						$.ajax({
+								data: {'event_id': event_id},
+								type: 'POST',
+								url: '/include/budget/expenditureQueries/addExpenditure.php',
+								success: function(data) {
+									$('.event-area li#event_' + event_id).click();
+								},
+						});
+					}
+					else {
+						alert("Please fill out all fields before adding expenditures.");
+					}
+				}); // ADD EVENT BUTTON
+				$("#delete-event-button").on('click', function() {
 					var event_name = $('.event-card .card-title').text().trim();
 					var event_id = $('#event_name').attr('number');
 					if (confirm("Are you sure you want to delete " + event_name + "?")) {
@@ -218,7 +259,65 @@ $(function() {
 							},
 						});
 					}
+				}); // DELETE EVENT BUTTON
+				$(".delete-cross").on('click', function() {
+					var event_id = $('#event_name').attr('number');
+					var expend_name = $(this).parent().parent().find('.card-title').text().trim();
+					var expend_id = $(this).attr('expenditure');
+					if (confirm("Are you sure you want to delete " + expend_name + "?")) {
+						$.ajax({
+							data: {'expend_id': expend_id},
+							type: 'POST',
+							url: '/include/budget/expenditureQueries/deleteExpenditure.php',
+							success: function(data) {
+								$('.event-area li#event_' + event_id).click();
+							},
+						});
+					}
 				}); // DELETE EXPENDITURE BUTTON
+				var before, after;
+				$('#expend_price').on('focusin', 'input', function() {
+					before = $(this).val();
+				}).on('focusout', 'input', function() {
+					after = $(this).val();
+					if ( before !== after ) {
+						var price = after;
+						var quantity = $('#expend_quantity').text();
+						updatePrices(price, quantity, this);
+					}
+				}); // END EXPEND_PRICE
+				$('#expend_quantity').on('focusin', 'input', function() {
+					before = $(this).val();
+				}).on('focusout', 'input', function() {
+					after = $(this).val();
+					if ( before !== after ) {
+						var price = $('#expend_price').text();
+						var quantity = after;
+						updatePrices(price, quantity, this);
+					}
+				}); // END EXPEND_PRICE
+				$('#expend_allocation').on('focusin', 'input', function() {
+					before = $(this).val();
+				}).on('focusout', 'input', function() {
+					after = $(this).val();
+					if ( before !== after ) {
+						var diff = after - before;
+						var current = $('#expenditure-allocated').text();
+						current = current.slice(1).trim();
+						$('#expenditure-allocated').text('$ ' + (parseFloat(current) + parseFloat(diff)).toFixed(2));
+						current = $('#allocated-event').text();
+						current = current.slice(1).trim();
+						$('#allocated-event').text('$ ' + (parseFloat(current) + parseFloat(diff)).toFixed(2));
+						current = $('#allocated-subheader').text();
+						current = current.trim();
+						$('#allocated-subheader').text((parseFloat(current) + parseFloat(diff)).toFixed(2));
+					}
+				}); // END EXPEND_ALLOCATION
+				$('#funds-subheader, #allocated-subheader').bind("DOMSubtreeModified", function() {
+					var funds     = $('#funds-subheader').text();
+					var allocated = $('#allocated-subheader').text();
+					$('#balance-subheader').text( (parseFloat(funds) - parseFloat(allocated)).toFixed(2) );
+				});
       } // END SUCCESS
     }); // END AJAX
   }); // END .peak-card
@@ -237,4 +336,18 @@ function escapeHtml(string) {
   return String(string).replace(/[&<>"'\/]/g, function (s) {
     return entityMap[s];
   });
+}
+
+function updatePrices(price, quantity, object) {
+	var current = $(object).parent().parent().parent().parent().parent().find('#expenditure-requested').text();
+	current = current.slice(1);
+	current = current.trim();
+	var diff = ((price * quantity) - current).toFixed(2);
+	$(object).parent().parent().parent().parent().parent().find('#expenditure-requested').text("$ " + (parseFloat(current) + parseFloat(diff)).toFixed(2));
+	current = $('#requested-event').text();
+	current = current.slice(1);
+	current = current.trim();
+	$('#requested-event').text("$ " + (parseFloat(current) + parseFloat(diff)).toFixed(2));
+	current = $('#requested-subheader').text().trim();
+	$('#requested-subheader').text((parseFloat(current) + parseFloat(diff)).toFixed(2));
 }

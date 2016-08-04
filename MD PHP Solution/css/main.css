@@ -129,17 +129,13 @@ hr {
   background-color: #fff;
   position: relative;
   font-size: 14px;
-  border-bottom: 1px dotted #eee;
-  border-top: 1px dotted #eee;
   transition: box-shadow 0.2s ease-in-out;
+  transition: color 0.4s ease-in-out;
   z-index: 7;
 }
 
 .sidebar .event-area ul .peak-card:hover {
-  z-index: 9 !important;
-  -moz-box-shadow: 0 0 6px #888;
-  -webkit-box-shadow: 0 0 6px #888;
-  box-shadow: 0 0 6px #888;
+  background-color: #eee;
 }
 
 .sidebar .event-area .peak-card.ui-sortable-helper {
@@ -336,7 +332,7 @@ hr {
 .main .content .event-card {
   background-color: #fff;
   border-radius: 2px;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.26);
+  box-shadow: 0 0 4px rgba(0,0,0,0.26);
   margin: 1.5em;
   z-index: 1;
 }
@@ -388,7 +384,7 @@ hr {
   color: #f33535;
 }
 
-#add-expenditure-button, #delete-expenditure-button {
+#add-expenditure-button, #delete-expenditure-button, #delete-event-button, .event-visibility {
   cursor: pointer;
 }
 
@@ -708,9 +704,9 @@ hr {
   -moz-transition: box-shadow 0.4s, transform 0.3s, margin 0.4s;
   -o-transition: box-shadow 0.4s, transform 0.3s, margin 0.4s;
   transition: box-shadow 0.4s, transform 0.3s, margin 0.4s;
-  box-shadow: 0px 2px 5px rgba(0,0,0,0.26);
-  -moz-box-shadow: 0px 2px 5px rgba(0,0,0,0.26);
-  -webkit-box-shadow: 0px 2px 5px rgba(0,0,0,0.26);
+  box-shadow: 0 0 4px rgba(0,0,0,0.18);
+  -moz-box-shadow: 0 0 4px rgba(0,0,0,0.18);
+  -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.18);
 }
 
 .collapse-card.ui-sortable-helper, .collapse-card.ui-sortable-helper.active  {
@@ -721,6 +717,8 @@ hr {
 .collapse-card .top {
   height: 4em;
   cursor: pointer;
+  transition: border-bottom 0.5s;
+  border-bottom: 1px solid rgba(0,0,0,0);
 }
 
 .collapse-card .top .title {
@@ -844,6 +842,7 @@ nav.container :only-child:not(.material-icons) {
   opacity: 0;
   transition: .2s;
   color: #fff;
+  background-color: #f33535;
 }
 
 .buttons:nth-last-of-type(2) {
@@ -872,24 +871,12 @@ nav.container :only-child:not(.material-icons) {
   opacity: 1;
 }
 
-.buttons:nth-last-of-type(1) {
-  background-color: #f33535;
+#viewed-event.buttons {
+  background-color: #f33535 !important;
 }
 
-.buttons:nth-last-of-type(2) {
-  background-color: #000;
-}
-
-.buttons:nth-last-of-type(3) {
-  background-color: #f33535;
-}
-
-.buttons:nth-last-of-type(4) {
-  background-color: #f33535;
-}
-
-.buttons:nth-last-of-type(5) {
-  background-color: #f33535;
+#unviewed-event.buttons {
+  background-color: #000 !important;
 }
 
 .buttons:hover {
@@ -911,6 +898,10 @@ nav.container :only-child:not(.material-icons) {
   visibility: hidden;
   opacity: 0;
   transition: .3s;
+}
+
+.red {
+  color: #f33535;
 }
 
 [tooltip]:hover:before, [tooltip-delete]:hover:before {

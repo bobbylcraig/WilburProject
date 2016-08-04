@@ -33,6 +33,12 @@
       case "expend_price_quote_second":
         $field = "second_source";
         break;
+      case "expend_allocation":
+        $field = "allocated";
+        break;
+      case "expend_reason":
+        $field = "reason";
+        break;
       default:
         break;
     }
@@ -143,6 +149,27 @@
   }
   elseif ( $field == "second_source" ) {
     if ( $query = $mysqli->prepare("UPDATE expenditure SET second_source = ? WHERE expend_id = ?") ) {
+      $query->bind_param("si", $value, $number);
+      if (!$query->execute()){
+        error_log ("Didn't work");
+      }
+      $query->close();
+    }
+  }
+  elseif ( $field == "allocated" ) {
+    if (substr($value, 0, 1) === '$') {
+      $value = substr($value, 1);
+    }
+    if ( $query = $mysqli->prepare("UPDATE expenditure SET allocated = ? WHERE expend_id = ?") ) {
+      $query->bind_param("di", $value, $number);
+      if (!$query->execute()){
+        error_log ("Didn't work");
+      }
+      $query->close();
+    }
+  }
+  elseif ( $field == "reason" ) {
+    if ( $query = $mysqli->prepare("UPDATE expenditure SET reason = ? WHERE expend_id = ?") ) {
       $query->bind_param("si", $value, $number);
       if (!$query->execute()){
         error_log ("Didn't work");

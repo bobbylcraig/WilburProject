@@ -4,7 +4,7 @@
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
   }
-  if ( $sidebarQuery = $mysqli->prepare("SELECT event_id, event_name, event_type FROM event JOIN org_year ON event.org_year_id = org_year.org_year_id WHERE org_year.year_id = ? and visible = 1 and org_year.org_id = ? ORDER BY event_order") ) {
+  if ( $sidebarQuery = $mysqli->prepare("SELECT event_id, event_name, event_type, visited FROM event JOIN org_year ON event.org_year_id = org_year.org_year_id WHERE org_year.year_id = ? and visible = 1 and org_year.org_id = ? ORDER BY event_order") ) {
     /* bind parameters for markers */
     $sidebarQuery->bind_param("ii", $_SESSION['viewing_year'], $_SESSION['viewing_user_id']);
 
@@ -25,7 +25,7 @@
 ?>
 
 <?php foreach ($sidebarArray as $event) { ?>
-  <li class="peak-card" id='event_<?php echo $event['event_id']; ?>'>
+  <li class="peak-card<?php if ($event['visited'] && isFinanceCommittee()) { echo ' red'; }  ?>" id='event_<?php echo $event['event_id']; ?>'>
     <i class="material-icons event-icon"><?php echo chooseIcon($event['event_type']); ?></i>
     <div class="event-name"><?php echo $event['event_name']; ?></div>
   </li>

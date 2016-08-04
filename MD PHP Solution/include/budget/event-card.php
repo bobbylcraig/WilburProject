@@ -22,7 +22,7 @@
     $eventQuery->close();
   }
   $_POST['viewing_event'] = $eventInfo['event_id'];
-  if ( $expendQuery = $mysqli->prepare("SELECT expend_id, expend_name, quantity, price, allocated, first_source, second_source FROM expenditure WHERE event_id = ? and visible = 1 ORDER BY expend_order") ) {
+  if ( $expendQuery = $mysqli->prepare("SELECT expend_id, expend_name, quantity, price, allocated, first_source, second_source, reason FROM expenditure WHERE event_id = ? and visible = 1 ORDER BY expend_order") ) {
     /* bind parameters for markers */
     $expendQuery->bind_param("i", $_POST['event_id']);
 
@@ -33,6 +33,18 @@
       error_log ("Didn't work");
     }
     $expendQuery->close();
+  }
+  if ( $totalQuery = $mysqli->prepare("SELECT SUM(quantity * price) AS total_price, SUM(allocated) AS total_allocated FROM expenditure WHERE event_id = ? and visible = 1 ORDER BY expend_order") ) {
+    /* bind parameters for markers */
+    $totalQuery->bind_param("i", $_POST['event_id']);
+
+    if ( $totalQuery->execute() ) {
+      $totalResult = $totalQuery->get_result();
+      $totalPrice  = $totalResult->fetch_all(MYSQLI_ASSOC)[0];
+    } else{
+      error_log ("Didn't work");
+    }
+    $totalQuery->close();
   }
   /* close connection */
   $mysqli->close();
@@ -46,16 +58,18 @@
       </div>
     </div>
     <div class="card-top-column">
-      <div class="card-price">$43.23</div>
+      <div id="requested-event" class="card-price">$ <?php if (is_null($totalPrice['total_price'])) { echo "0.00"; } else { echo $totalPrice['total_price']; } ?></div>
     </div>
+    <?php if ( isDoneAllocating() ) { ?>
     <div class="card-top-column turn-column">
       <div class="turn-text">
         Allocated
       </div>
     </div>
     <div class="card-top-column">
-      <div class="card-price">$21.62</div>
+      <div id="allocated-event" class="card-price">$ <?php if (is_null($totalPrice['total_allocated'])) { echo "0.00"; } else { echo $totalPrice['total_allocated']; } ?></div>
     </div>
+    <?php } ?>
     <div class="card-top-column turn-column turn-title">
       <div class="turn-text">
         Event/Item
@@ -67,13 +81,13 @@
     <?php if ( canEdit() ) { ?>
       <nav class="container">
         <?php if ( isset($_POST['viewing_event']) ) { ?>
-          <a id="delete-expenditure-button" tooltip="Delete Event" class="buttons"><i class="material-icons">delete</i></a>
           <a id="add-expenditure-button" tooltip="Add Expenditure" class="buttons"><i class="material-icons">add_circle_outline</i></a>
+          <a id="delete-event-button" tooltip="Delete Event" class="buttons"><i class="material-icons">delete</i></a>
           <?php if ( ($_SESSION['user']['role'] == 'org') || (( $_SESSION['viewing_user_id'] != $_SESSION['user']['id'] ) && canEdit()) ) { ?>
             <a href="/include/budget/eventQueries/addEvent.php?adding_user_id=<?php echo $_SESSION['viewing_user_id']; ?>" tooltip="Add Event" class="buttons"><i class="material-icons">add</i></a>
           <?php } ?>
           <?php if ( isAdmin() ) { ?>
-            <a href="#" tooltip="Visited Event" class="buttons"><i class="material-icons">visibility_off</i></a>
+            <?php echo isVisitedIcon(); ?>
           <?php } ?>
         <?php } else { ?>
             <a href="/include/budget/eventQueries/addEvent.php?adding_user_id=<?php echo $_SESSION['viewing_user_id']; ?>" tooltip="Add Event" class="buttons"><i class="material-icons">add</i></a>
