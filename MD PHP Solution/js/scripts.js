@@ -202,7 +202,7 @@ $(function() {
 					});
 					return value;
 				}, {
-					data	    : "{'Click to edit':'Click to edit', 'Event':'Event','Performance':'Performance','Conference':'Conference','Travel':'Travel','Athletic':'Athletic','Food':'Food','Office Supplies/Printing/Ads':'Office Supplies/Printing/Ads','Capital Purchase':'Capital Purchase','Misc':'Misc', 'selected':'Click to Edit'}",
+					data	    : "{'Click to edit...':'Click to edit...', 'Event':'Event','Performance':'Performance','Conference':'Conference','Travel':'Travel','Athletic':'Athletic','Food':'Food','Office Supplies/Printing/Ads':'Office Supplies/Printing/Ads','Capital Purchase':'Capital Purchase','Misc':'Misc', 'selected':'Click to Edit'}",
 					type      : "select",
 					cssclass	: 'editable',
 					onblur : "submit"

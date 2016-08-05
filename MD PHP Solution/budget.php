@@ -1,7 +1,7 @@
 <?php session_start(); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/include/functions/config.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/include/functions/functions.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/include/functions/preserveViewing.php"); ?>
+<?php require_once("include/functions/config.php"); ?>
+<?php require_once("include/functions/functions.php"); ?>
+<?php require_once("include/functions/preserveViewing.php"); ?>
 <?php if ( !isLoggedIn() ) { $_SESSION['feedback'] = ['color' => 'red', 'message' =>'Please login to view that page.']; header("Location: /index.php"); die; } ?>
 
 <html lang="en">

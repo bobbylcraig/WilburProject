@@ -1,6 +1,6 @@
 <?php require_once("include/functions/config.php"); ?>
 <?php require_once("include/functions/functions.php"); ?>
-<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/include/functions/preserveViewing.php"); ?>
+<?php require_once("include/functions/preserveViewing.php"); ?>
 <?php session_start(); ?>
 <?php if ( isLoggedIn() ) { header("Location: budget.php"); die; } ?>
 

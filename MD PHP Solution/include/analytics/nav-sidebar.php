@@ -1,9 +1,13 @@
 <div class="nav-sidebar">
   <ul>
-    <a href="/profile.php"><li>Profile</li></a>
+    <a href="/index.php"><li>Home</li></a>
     <a href="/analytics.php"><li>Analytics</li></a>
+    <?php if ( isLoggedIn() ) { ?>
+    <a href="/profile.php"><li>Profile</li></a>
+    <a href="/budget.php"><li>Budgeting</li></a>
     <a href="/collaborations.php"><li>Collaborations</li></a>
     <a href="/include/functions/logout.php"><li>Logout</li></a>
+    <?php } ?>
   </ul>
   <div class="footer">
     <p style="text-align: center;">Made by Bobby Craig</p>
