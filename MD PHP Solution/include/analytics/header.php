@@ -4,10 +4,10 @@
       <nav class="title-dropdown">
         <?php if ( isLoggedIn() ) { ?>
         <ul>
-          <li class="title-style"><a href="#"><?php echo $_SESSION['user']['screenname']; // PRINTS SCREENNAME ?>
-          <?php echo ' &nbsp;>&nbsp; ' . grabCurrentYear(); ?>
+          <li class="title-style"><a href="#"><?php echo $_SESSION['user']['screenname']; // PRINTS SCREENNAME ?>&nbsp;<span class="year-org">
+          <?php echo ' >&nbsp; ' . grabCurrentYear(); ?>
           <?php if ( $_SESSION['user']['id'] != $_SESSION['viewing_user_id'] ) { echo '&nbsp; > &nbsp;' . grabCurrentScreenname(); } ?>
-          <span class="title-dropdown-option title-caret"></span></a>
+          </span><span class="title-dropdown-option title-caret"></span></a>
           <?php if ( isFinanceCommittee() ) { require("headerQueries/isFinanceCommittee.php"); }
                 else { require("headerQueries/isNotFinanceCommittee.php"); } ?>
           </li>

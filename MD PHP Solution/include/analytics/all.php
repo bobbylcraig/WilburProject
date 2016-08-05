@@ -1,3 +1,3 @@
 <div class="tile whole">
-  All Organization Report
+  <h1>All Organization Report</h1>
 </div>

@@ -39,8 +39,8 @@
 
     <?php require("include/analytics/header.php"); ?>
 
-    <div class="main" style="margin-left: 0; margin-top: 4em;">
-      <div class="content">
+    <div class="main" style="margin-left: 0;">
+      <div class="content" style="padding-top: 4em;">
         <div class="content-area">
           <div class="tile-wrapper">
             <div class="tile-container">
@@ -72,15 +72,6 @@
                     }
                     require("include/analytics/all.php");
               ?>
-              <div class="tile third">
-                <h1>First</h1>
-              </div>
-              <div class="tile third">
-                <h1>Second</h1>
-              </div>
-              <div class="tile third">
-                <h1>Third</h1>
-              </div>
             </div>
           </div>
         </div>

@@ -12,7 +12,6 @@
   <?php if ( isFinanceCommittee() && $_SESSION['user']['id'] == $_SESSION['viewing_user_id'] ) { ?>
     <div class="event-area">
       <div class="priority-card">
-        <i title="Highest Priority" class="material-icons priority-icon">help</i>
         <div class="priority-name"><h4>Finance Committee Members Cannot Have A Budget.</h4></div>
         <hr class="not-mobile">
         <div class="priority-name">Select an organization to begin budget management.</div>

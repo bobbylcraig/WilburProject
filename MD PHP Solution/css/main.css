@@ -1027,8 +1027,16 @@ nav.container :only-child:not(.material-icons) {
     margin-left: 5em;
   }
 
+  .main .content {
+    padding-top: 4em !important;
+  }
+
   .header, .sub-header {
     left: 5em;
+  }
+
+  .sub-header {
+    display: none;
   }
 
   .sidebar .logo-header .header-wrapper {
@@ -1088,6 +1096,12 @@ nav.container :only-child:not(.material-icons) {
 
   .sidebar .event-area .peak-card .event-name {
     display: none;
+  }
+  .year-org {
+    display: none;
+  }
+  .fourth {
+    flex: 0 0 calc(50% - 1em);
   }
 }
 

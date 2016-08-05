@@ -1,3 +1,3 @@
 <div class="tile whole">
-  <?php echo $_SESSION['user']['screenname']; ?>'s Report
+  <h1><?php echo grabCurrentScreenname(); ?>'s Report</h1>
 </div>
