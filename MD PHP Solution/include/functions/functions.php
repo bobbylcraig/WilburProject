@@ -97,12 +97,10 @@
     $t = time();
     $t0 = $_SESSION["user_time"];
     $diff = $t - $t0;
-    if ($diff > 1440 || !isset($t0))
-    {
+    if ($diff > 1440 || !isset($t0)) {
       return true;
     }
-    else
-    {
+    else {
       $_SESSION["user_time"] = time();
     }
   }
@@ -238,7 +236,7 @@
  ***************************************************/
 
   // Logout user if logged in passed certain amount of time
-  if ( auto_logout() ) {
+  if ( isLoggedIn() && auto_logout() ) {
     session_destroy();
     session_start();
     $_SESSION['feedback'] = ['color' => 'yellow', 'message' =>'Session timed out. Please login again.'];

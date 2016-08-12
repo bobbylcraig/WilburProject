@@ -29,11 +29,21 @@
 
     <link rel="shortcut icon" href="favicon.png">
 
+    <script src="/js/Chart.bundle.js"></script>
+
     <?php require("include/which-styles.php"); ?>
 
   </head>
 
   <body>
+
+    <style>
+      canvas {
+          -moz-user-select: none;
+          -webkit-user-select: none;
+          -ms-user-select: none;
+      }
+    </style>
 
     <?php require("include/analytics/nav-sidebar.php"); ?>
 
@@ -42,37 +52,35 @@
     <div class="main" style="margin-left: 0;">
       <div class="content" style="padding-top: 4em;">
         <div class="content-area">
-          <div class="tile-wrapper">
-            <div class="tile-container">
-              <div class="tile whole">
-                <h1>Analytics</h1>
-              </div>
-              <?php if ( isset($_SESSION['viewing_user_id']) && ( !isFinanceCommittee() || ( isFinanceCommittee() && $_SESSION['viewing_user_id'] != $_SESSION['user']['id'] ) ) ) {
-                      require("include/analytics/individual.php");
+          <div class="grid">
+            <div class="tile desktop-12 tablet-12">
+              <h1>Analytics</h1>
+            </div>
+            <?php if ( isset($_SESSION['viewing_user_id']) && ( !isFinanceCommittee() || ( isFinanceCommittee() && $_SESSION['viewing_user_id'] != $_SESSION['user']['id'] ) ) ) {
+                    require("include/analytics/individual.php");
+                  }
+                  else {
+                    if ( isset($_SESSION['user']) ) {
+            ?>
+                      <div class="tile desktop-12 tablet-12">
+                        <h1>Cannot View Organization Analytics</h1>
+                        <hr>
+                        <p>Please select an org to get its organizational analytics.</p>
+                      </div>
+            <?php
                     }
                     else {
-                      if ( isset($_SESSION['user']) ) {
-              ?>
-                        <div class="tile whole">
-                          <h1>Cannot View Organization Analytics</h1>
-                          <hr>
-                          <p>Please select an org to get its organizational analytics.</p>
-                        </div>
-              <?php
-                      }
-                      else {
-              ?>
-                        <div class="tile whole">
-                          <h1>Cannot View Organization Analytics</h1>
-                          <hr>
-                          <h1>Please login to get organization-specific analytics.</h1>
-                        </div>
-              <?php
-                      }
+            ?>
+                      <div class="tile desktop-12 tablet-12">
+                        <h1>Cannot View Organization Analytics</h1>
+                        <hr>
+                        <p>Please login to get organization-specific analytics.</p>
+                      </div>
+            <?php
                     }
-                    require("include/analytics/all.php");
-              ?>
-            </div>
+                  }
+                  require("include/analytics/all.php");
+            ?>
           </div>
         </div>
       </div>

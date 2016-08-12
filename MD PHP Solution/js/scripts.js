@@ -1,9 +1,7 @@
 (function () {
 	$('.hamburger-menu').on('click', function() {
     $('.nav-sidebar').toggleClass('show');
-    $('.partial-modal').toggleClass('darken');
 		$('.bar').toggleClass('animate');
-    $('body').toggleClass('darken');
 	});
 })();
 
