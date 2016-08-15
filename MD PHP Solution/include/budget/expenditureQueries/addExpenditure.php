@@ -16,7 +16,10 @@
 
       if ($query->execute()){
         $result = $query->get_result();
-        $info  = $result->fetch_all(MYSQLI_ASSOC);
+        $info = array();
+        while ($row = $result->fetch_assoc()) {
+          $info[] = $row;
+        }
       } else{
         error_log ("Didn't work");
       }

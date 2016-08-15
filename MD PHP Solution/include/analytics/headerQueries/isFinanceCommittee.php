@@ -9,7 +9,10 @@
 
     if ($headerQuery->execute()){
       $result = $headerQuery->get_result();
-      $array  = $result->fetch_all(MYSQLI_ASSOC);
+      $array = array();
+      while ($row = $result->fetch_assoc()) {
+        $array[] = $row;
+      }
     } else{
       error_log ("Didn't work");
     }

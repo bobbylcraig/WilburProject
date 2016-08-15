@@ -42,7 +42,11 @@
 
        if ($yearQuery->execute()){
          $yearResult = $yearQuery->get_result();
-         $done_allocating  = $yearResult->fetch_all(MYSQLI_ASSOC)[0]['done_allocating'];
+         $done_allocating = array();
+         while ($row = $yearResult->fetch_assoc()) {
+           $done_allocating[] = $row;
+         }
+         $done_allocating = $done_allocating[0]['done_allocating'];
        } else{
          error_log ("Didn't work");
        }
@@ -208,7 +212,11 @@
 
         if ($visitedQuery->execute()){
           $visitedResult = $visitedQuery->get_result();
-          $visited  = $visitedResult->fetch_all(MYSQLI_ASSOC)[0]['visited'];
+          $visited = array();
+          while ($row = $visitedResult->fetch_assoc()) {
+            $visited[] = $row;
+          }
+          $visited  = $visited[0]['visited'];
         } else{
           error_log ("Didn't work");
         }
@@ -227,6 +235,29 @@
       }
       return "<a tooltip='$tooltip' id='$id' class='buttons event-visibility'><i class='material-icons'>$icon</i></a>";
     }
+    /*
+     * grabRecentYear function
+     * For pulling the most recently finished budgeting year
+     */
+     function grabRecentYear() {
+       $mysqli = new mysqli(SERVERNAME, USERNAME, PASSWORD, DATABASE);
+       if (mysqli_connect_errno()) {
+         printf("Connect failed: %s\n", mysqli_connect_error());
+         exit();
+       }
+       if ( $recentQuery = $mysqli->prepare("SELECT year_id FROM year WHERE done_allocating = 1 ORDER BY year_id DESC")) {
+         if ($recentQuery->execute()){
+           $recentResult = $recentQuery->get_result();
+           $recentArray  = $recentResult->fetch_array(MYSQLI_ASSOC); // this does work :)
+         } else{
+           error_log ("Didn't work");
+         }
+         $recentQuery->close();
+       }
+       /* close connection */
+       $mysqli->close();
+       return $recentArray['year_id'];
+     }
 
 
 /***************************************************

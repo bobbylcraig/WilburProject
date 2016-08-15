@@ -12,7 +12,10 @@
       $query->bind_param("ii", $_GET['adding_user_id'], $_SESSION['current_year']);
       if ($query->execute()){
         $queryResult = $query->get_result();
-        $result  = $queryResult->fetch_all(MYSQLI_ASSOC);
+        $result = array();
+        while ($row = $queryResult->fetch_assoc()) {
+          $result[] = $row;
+        }
       } else{
         error_log ("Didn't work");
       }
@@ -28,7 +31,10 @@
         $query->bind_param("i", $org_year_id);
         if ($query->execute()){
           $queryResult = $query->get_result();
-          $result  = $queryResult->fetch_all(MYSQLI_ASSOC);
+          $result = array();
+          while ($row = $queryResult->fetch_assoc()) {
+            $result[] = $row;
+          }
         } else{
           error_log ("Didn't work");
         }

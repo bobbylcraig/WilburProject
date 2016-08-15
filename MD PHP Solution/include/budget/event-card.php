@@ -15,7 +15,11 @@
 
     if ($eventQuery->execute()){
       $eventResult = $eventQuery->get_result();
-      $eventInfo  = $eventResult->fetch_all(MYSQLI_ASSOC)[0];
+      $eventInfo = array();
+      while ($row = $eventResult->fetch_assoc()) {
+        $eventInfo[] = $row;
+      }
+      $eventInfo = $eventInfo[0];
     } else{
       error_log ("Didn't work");
     }
@@ -28,7 +32,10 @@
 
     if ( $expendQuery->execute() ) {
       $expendResult = $expendQuery->get_result();
-      $expendInfo  = $expendResult->fetch_all(MYSQLI_ASSOC);
+      $expendInfo = array();
+      while ($row = $expendResult->fetch_assoc()) {
+        $expendInfo[] = $row;
+      }
     } else{
       error_log ("Didn't work");
     }
@@ -40,7 +47,11 @@
 
     if ( $totalQuery->execute() ) {
       $totalResult = $totalQuery->get_result();
-      $totalPrice  = $totalResult->fetch_all(MYSQLI_ASSOC)[0];
+      $totalPrice = array();
+      while ($row = $totalResult->fetch_assoc()) {
+        $totalPrice[] = $row;
+      }
+      $totalPrice = $totalPrice[0];
     } else{
       error_log ("Didn't work");
     }

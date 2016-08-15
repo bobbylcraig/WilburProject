@@ -10,7 +10,10 @@
 
     if ($sidebarQuery->execute()){
       $result = $sidebarQuery->get_result();
-      $sidebarArray  = $result->fetch_all(MYSQLI_ASSOC);
+      $sidebarArray = array();
+      while ($row = $result->fetch_assoc()) {
+        $sidebarArray[] = $row;
+      }
     } else{
       error_log ("Didn't work");
     }

@@ -5,6 +5,26 @@
 	});
 })();
 
+$('.count-js').each(function() {
+  var $this = $(this),
+    countTo = $this.attr('count-to');
+  $({
+    countNum: $this.text()
+  }).animate({
+      countNum: countTo
+    },
+    {
+      duration: 1000,
+      easing: 'linear',
+      step: function() {
+        $this.text(Math.floor(this.countNum));
+      },
+      complete: function() {
+        $this.text(this.countNum);
+      }
+    });
+});
+
 $(function() {
   // AJAX Event Sort
   $( ".sortable-event" ).sortable({
@@ -86,7 +106,7 @@ $(function() {
             }(jQuery)
         }).call(this);
 				$('.editable-input').editable(function(value, settings) {
-					value = escapeHtml(value);
+					newValue = escapeHtml(value);
 					var grab = $(this);
 					var field = $(this).attr("id");
 					var number = $(this).attr("number");
@@ -94,7 +114,7 @@ $(function() {
 							data: {
 								'field'   : field,
 								'number'  : number,
-								'value'   : value
+								'value'   : newValue
 							},
 							type: 'POST',
 							url: '/include/budget/jeditableQuery.php',

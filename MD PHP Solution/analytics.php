@@ -1,7 +1,13 @@
 <?php session_start(); ?>
 <?php require_once("include/functions/config.php"); ?>
 <?php require_once("include/functions/functions.php"); ?>
-<?php if ( isLoggedIn() ) { require_once("include/functions/preserveViewing.php"); } ?>
+<?php if ( isLoggedIn() ) {
+        require_once("include/functions/preserveViewing.php");
+      }
+      else {
+        $_SESSION['viewing_year'] = grabRecentYear();
+      }
+?>
 
 <html lang="en">
 
@@ -30,6 +36,14 @@
     <link rel="shortcut icon" href="favicon.png">
 
     <script src="/js/Chart.bundle.js"></script>
+    <script>
+    var randomColorFactor = function() {
+      return Math.round(Math.random() * 255);
+    };
+    var randomColor = function() {
+      return 'rgba(' + randomColorFactor() + ',' + randomColorFactor() + ',' + randomColorFactor() + ',' + (0.7 || '.3') + ')';
+    };
+    </script>
 
     <?php require("include/which-styles.php"); ?>
 
@@ -56,31 +70,37 @@
             <div class="tile desktop-12 tablet-12">
               <h1>Analytics</h1>
             </div>
-            <?php if ( isset($_SESSION['viewing_user_id']) && ( !isFinanceCommittee() || ( isFinanceCommittee() && $_SESSION['viewing_user_id'] != $_SESSION['user']['id'] ) ) ) {
-                    require("include/analytics/individual.php");
-                  }
-                  else {
-                    if ( isset($_SESSION['user']) ) {
-            ?>
-                      <div class="tile desktop-12 tablet-12">
-                        <h1>Cannot View Organization Analytics</h1>
-                        <hr>
-                        <p>Please select an org to get its organizational analytics.</p>
-                      </div>
-            <?php
+            <?php if ( isDoneAllocating() ) { ?>
+              <?php if ( isset($_SESSION['viewing_user_id']) && ( !isFinanceCommittee() || ( isFinanceCommittee() && $_SESSION['viewing_user_id'] != $_SESSION['user']['id'] ) ) ) {
+                      require("include/analytics/individual.php");
                     }
                     else {
-            ?>
-                      <div class="tile desktop-12 tablet-12">
-                        <h1>Cannot View Organization Analytics</h1>
-                        <hr>
-                        <p>Please login to get organization-specific analytics.</p>
-                      </div>
-            <?php
+                      if ( isLoggedIn() ) {
+              ?>
+                        <div class="tile desktop-12 tablet-12">
+                          <h1>Cannot View Organization Analytics</h1>
+                          <hr>
+                          <p>Please select an org to get its organizational analytics.</p>
+                        </div>
+              <?php
+                      }
+                      else {
+              ?>
+                        <div class="tile desktop-12 tablet-12">
+                          <h1>Cannot View Organization Analytics</h1>
+                          <hr>
+                          <p>Please login to get organization-specific analytics.</p>
+                        </div>
+              <?php
+                      }
                     }
-                  }
-                  require("include/analytics/all.php");
-            ?>
+                    require("include/analytics/all.php");
+              ?>
+            <?php } else { ?>
+              <div class="tile desktop-12 tablet-12">
+                <p>Please wait for the finance committee to finish allocating this year.</p>
+              </div>
+            <?php } ?>
           </div>
         </div>
       </div>

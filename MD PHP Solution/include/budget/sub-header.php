@@ -10,7 +10,11 @@
 
     if ($subheadQuery->execute()){
       $subheadResult = $subheadQuery->get_result();
-      $subheadArray  = $subheadResult->fetch_all(MYSQLI_ASSOC)[0];
+      $subheadArray = array();
+      while ($row = $subheadResult->fetch_assoc()) {
+        $subheadArray[] = $row;
+      }
+      $subheadArray = $subheadArray[0];
     } else{
       error_log ("Didn't work");
     }
