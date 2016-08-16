@@ -1,2 +1,4 @@
 .idea/*
 *.sublime*
+.meteor/*
+*/config.php
