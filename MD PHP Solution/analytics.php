@@ -59,7 +59,7 @@
       }
     </style>
 
-    <?php require("include/analytics/nav-sidebar.php"); ?>
+    <?php require("include/nav-sidebar.php"); ?>
 
     <?php require("include/analytics/header.php"); ?>
 

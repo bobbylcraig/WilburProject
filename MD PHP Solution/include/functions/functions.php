@@ -258,6 +258,17 @@
        $mysqli->close();
        return $recentArray['year_id'];
      }
+     /*
+      * isNull function
+      */
+      function isNull($data) {
+        if ( is_null($data) ) {
+          return "<span style='opacity: 0.3;''>Org Not Registered Yet</span>";
+        }
+        else {
+          return $data;
+        }
+      }
 
 
 /***************************************************

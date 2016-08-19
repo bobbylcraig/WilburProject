@@ -4,7 +4,7 @@
     printf("Connect failed: %s\n", mysqli_connect_error());
     exit();
   }
-  if ( $headerQuery = $mysqli->prepare("SELECT total.year_name, users.screenname AS org_name, total.year_id, users.id AS org_id FROM users JOIN (SELECT year.year_name, year.year_id, org_year.org_id FROM year JOIN org_year ON year.year_id = org_year.year_id) AS total ON total.org_id = users.id ORDER BY total.year_id DESC, org_name ASC") ) {
+  if ( $headerQuery = $mysqli->prepare("SELECT total.year_name, users.screenname AS org_name, total.year_id, users.id AS org_id FROM users JOIN (SELECT year.year_name, year.year_id, org_year.org_id FROM year JOIN org_year ON year.year_id = org_year.year_id) AS total ON total.org_id = users.id WHERE users.isActive = 1 ORDER BY total.year_id DESC, org_name ASC") ) {
     /* bind parameters for markers */
 
     if ($headerQuery->execute()){

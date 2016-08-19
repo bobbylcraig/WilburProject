@@ -38,7 +38,7 @@
 
     <div class="full-modal">
 
-      <?php require("include/budget/nav-sidebar.php"); ?>
+      <?php require("include/nav-sidebar.php"); ?>
 
       <?php require("include/budget/header.php"); ?>
 

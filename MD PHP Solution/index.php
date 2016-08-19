@@ -36,8 +36,8 @@
   <body>
 
     <?php require("include/nav-sidebar-front.php"); ?>
-    <?php require("include/notice.php"); ?>
     <div class="front">
+      <?php require("include/notice.php"); ?>
       <div class="pen-title">
         <h1>buDUget</h1>
       </div>
