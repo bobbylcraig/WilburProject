@@ -123,6 +123,9 @@ $(function() {
 									$(".event-card .card-top-column.card-title").text(value);
 									$("li#event_" + number + " .event-name").text(value);
 								}
+								else if ( field == "expend_name" ) {
+									$("#expend_" + number).find('.card-title').text(value);
+								}
 							}
 					});
 					return value;

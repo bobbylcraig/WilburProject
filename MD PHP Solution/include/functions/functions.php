@@ -4,7 +4,7 @@
    * Checks if user is logged in
    */
   function isLoggedIn() {
-    if (isset($_SESSION['user']))
+    if (isset($_SESSION['user']['role']))
       return true;
     else
       return false;

@@ -832,7 +832,7 @@ hr {
 
 /* Add Button Stuff */
 
-.container {
+nav.container {
   margin: 1em;
   position: fixed;
   bottom: 0;
@@ -845,7 +845,11 @@ nav.container :only-child:not(.material-icons) {
   display: none;
 }
 
-.container:hover .buttons:not(:last-of-type) {
+nav.container .buttons:not(:last-of-type) {
+  display: none;
+}
+
+nav.container:hover .buttons:not(:last-of-type) {
   width: 40px;
   height: 40px;
   opacity: 1;
@@ -860,7 +864,7 @@ nav.container :only-child:not(.material-icons) {
   display: block;
 }
 
-.container:hover .rotate {
+nav.container:hover .rotate {
   transform: rotate(0deg);
 }
 

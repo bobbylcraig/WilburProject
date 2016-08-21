@@ -12,7 +12,7 @@
     <meta name="author" content="Bobby Craig">
     <meta name="description" content="A budgeting application for use at Denison University.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title><?php echo grabCurrentScreenname(); ?>'s Profile | buDUget</title>
+    <title><?php if ( !isFinanceCommittee() ) { echo grabCurrentScreenname(); ?>'s Profile<?php } else { ?> Admin Controls <?php } ?> | buDUget</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -39,9 +39,10 @@
     <?php require("include/nav-sidebar.php"); ?>
 
     <?php require("include/profile/header.php"); ?>
+    <?php require("include/profile/sub-header.php"); ?>
 
     <div class="main" style="margin-left: 0;">
-      <div class="content" style="padding-top: 4em;">
+      <div class="content" style="padding-top: <?php if (isAdmin()) { ?>8<?php } else { ?>4<?php } ?>em;">
         <div class="content-area">
           <div class="grid">
             <div class="tile desktop-12 tablet-12">
