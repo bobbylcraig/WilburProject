@@ -94,7 +94,7 @@
         <?php if ( isset($_POST['viewing_event']) ) { ?>
           <a id="add-expenditure-button" tooltip="Add Expenditure" class="buttons"><i class="material-icons">add_circle_outline</i></a>
           <a id="delete-event-button" tooltip="Delete Event" class="buttons"><i class="material-icons">delete</i></a>
-          <?php if ( ($_SESSION['user']['role'] == 'org') || (( $_SESSION['viewing_user_id'] != $_SESSION['user']['id'] ) && canEdit()) ) { ?>
+          <?php if ( ($_SESSION['user']['role'] == 'org') || (( $_SESSION['viewing_user_id'] != $_SESSION['user']['id'] && isFinanceCommittee() ) ) ) { ?>
             <a href="/include/budget/eventQueries/addEvent.php?adding_user_id=<?php echo $_SESSION['viewing_user_id']; ?>" tooltip="Add Event" class="buttons"><i class="material-icons">add</i></a>
           <?php } ?>
           <?php if ( isAdmin() ) { ?>

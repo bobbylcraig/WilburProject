@@ -78,7 +78,7 @@
   */
   function canEdit() {
     if ( isset( $_SESSION['user']['role'] ) ) {
-      if ( $_SESSION['user']['role'] == "admin" or $_SESSION['user']['role'] == "org" ) {
+      if ( $_SESSION['user']['role'] == "admin" || ($_SESSION['user']['role'] == "org" && !isDoneAllocating()) ) {
         return true;
       }
       else {
